@@ -1,0 +1,15 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-alpine
+    ports:
+      - "56721:5672"
+
+  server:
+    build:
+      dockerfile: ../Dockerfile
+      context: server/
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./server/:/app
+    restart: always

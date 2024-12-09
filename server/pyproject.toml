@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "forgemqproject"
+version = "0.1.0"
+description = ""
+authors = ["Daniiar Mukash uulu <d_mukashuulu@wargaming.net>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aio-pika = "^9.5.1"
+pyarmor = "^9.0.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

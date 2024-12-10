@@ -3,13 +3,19 @@ services:
     image: rabbitmq:3-alpine
     ports:
       - "56721:5672"
+  healthcheck:
+    test: [ "CMD", "rabbitmqctl", "status" ]
+    interval: 10s
+    timeout: 5s
+    retries: 12
 
   server:
     build:
       dockerfile: ../Dockerfile
       context: server/
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
     volumes:
       - ./server/:/app
     restart: always

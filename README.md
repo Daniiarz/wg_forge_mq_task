@@ -1,8 +1,6 @@
-Forge into task Message Brokers
+## Forge intro task Message Brokers
 
-Purpose: To learn about message brokers and how they can be used to create a distributed system.
-
-Task is to create a simple consumer and producer using RabbitMQ, 
+Purpose of this task is to create a simple consumer and producer using RabbitMQ, 
 example itself won't go further than hello world in the examples of the RabbitMQ tutorial. The goal is to obtain 
 specific key that will show that task completed successfully.
 
@@ -16,13 +14,13 @@ data across the Europe capital cities. The data is written in JSON format and lo
   "timestamp": "1733752033"
 }
 ```
-Your part in this scenario is to create a consumer that will listen to the weather data queue 
-and monitor the temperature, specifically Vilnius. If the temperature in Vilnius goes above 31 degrees,
-you need to send an alert message to notify Vilnius citizens about the heatwave. Message that 
-you will send should be exactly the same that you received from the weather data queue. Another queue will contain results 
-of notifications that were sent to the citizens, if you sent correct message to the citizens, you will receive
-a piece of a key string that you need to obtain. Just as an advice, do not send all the messages to alerts queue,  this 
-way you will get 100k long string that won't be correct.
+Your task is to create a consumer that listens to the weather data queue and monitors temperatures for Vilnius.
+If the temperature exceeds 31°C, send an alert message identical to the one received from the queue to notify
+citizens about the heatwave.  
+
+A results queue will return pieces of a key string for correct alerts. Avoid sending all messages to the alerts queue,
+as this will generate a 100k-long invalid string.
+
 Example of the message that you will receive in the results queue:
 ```
 {
@@ -63,7 +61,8 @@ Consumers on other side are ready to listen to your alerts and will send notific
     ```
     docker-compose up
     ```
-* Server will start, and you can connect to the RabbitMQ server on port 56721
+* Server will start, and you can connect to the RabbitMQ server on port 56721 on **localhost:56721 (127.0.0.1:56721)**,
+you can ignore username and password fields, just connect to the server. 
 * In case you experience some unexpected behavior, you can restart the server with the following command:
     ```
     docker-compose down -v
@@ -91,7 +90,8 @@ just make sure that you can connect to the rabbitmq server that is running in do
 * If you consumed all the messages and no other messages are coming from weather queue, 
 just restart the server with rabbitmq container, this will reset the messages and you can start again.
 * Each message got random timestamp and event_id, so you can't just send the same message to the alerts queue. No
-need to store messages somewhere else, purpose of this task is to show that you can build pipeline automated pipeline
+need to store messages somewhere else, purpose of this task is to show that you can build pipelines and react messages
+with code
 * If you are using docker, make sure that you have enough resources allocated to the docker,
 
 **Just to make sure that you are on the right track, here are some HINTS:**

@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "name": "root",
+      "password": "12345adminroot",
+      "tags": "administrator"
+    },
+    {
+      "name": "forge_user",
+      "password": "M7Nzf3eok24mRKm",
+      "tags": "generic"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "root",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "forge_user",
+      "vhost": "/",
+      "configure": "",
+      "write": ".*",
+      "read": ".*"
+    }
+  ]
+}

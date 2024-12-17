@@ -12,4 +12,4 @@ RUN poetry config virtualenvs.create false && poetry install
 
 COPY . /app
 
-CMD ["python", "/app/dist/main.py"]
+CMD ["python", "/app/script.py"]

@@ -134,5 +134,5 @@ async def alerts_api(
 
 
 if __name__ == "__main__":
-    # asyncio.run(producer())
+    asyncio.run(producer())
     uvicorn.run("script:app", host="0.0.0.0", port=5000, log_level="info", workers=4)

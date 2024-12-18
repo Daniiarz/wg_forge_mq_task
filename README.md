@@ -55,7 +55,7 @@ streams.
 * Consuming from the stream can be achieved by passing parameters:
   ```python
     channel.basic_qos(
-        prefetch_count=1,
+        prefetch_count=10, 
     )
     channel.basic_consume(
         queue='weather_stream',

@@ -26,6 +26,12 @@ class NotificationResponse(BaseModel):
 
 
 async def producer():
+    r_conn = redis.Redis.from_pool(redis_pool)
+
+    a = await r_conn.get('key_set')
+    if a:
+        print("Already generated")
+        return
     key = "WG-FORGE-2025-50a97dff20c645f5954135ab17be25c8"
     e_messages = {
         uuid.uuid4().hex: i for i in key
@@ -83,8 +89,6 @@ async def producer():
     )
     routing_key = 'weather_queue'
 
-    r_conn = redis.Redis.from_pool(redis_pool)
-
     await asyncio.gather(
         *[
             r_conn.set(k, val) for (k, val) in e_messages.items()
@@ -108,6 +112,8 @@ async def producer():
             ]
         )
         print("Published all messages")
+
+    await r_conn.set('key_set', 1)
 
 
 app = FastAPI()

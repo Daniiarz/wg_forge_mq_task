@@ -1,6 +1,7 @@
 import asyncio
 import json
 import random
+import time
 import uuid
 from datetime import datetime
 from typing import Annotated
@@ -27,7 +28,7 @@ class NotificationResponse(BaseModel):
 
 async def producer():
     r_conn = redis.Redis.from_pool(redis_pool)
-
+    time.sleep(random.randint(0, 10))
     a = await r_conn.get('key_set')
     if a:
         print("Already generated")
@@ -87,7 +88,7 @@ async def producer():
         password="12345adminroot",
         port=5672,
     )
-    routing_key = 'weather_queue'
+    routing_key = 'weather_stream'
 
     await asyncio.gather(
         *[

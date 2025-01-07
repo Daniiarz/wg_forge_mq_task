@@ -45,15 +45,16 @@ data is written to the **_weather_stream_**.
     
     collect key_char when you reach 46 symbols you can stop consuming messages and print key to check if its correct
     ```
-  
     notification_results -> consumer(collect parts of the key, no need to send anything)
-    ```
 * We recommend using the official RabbitMQ client for Python (pika, aio_pika), but you can use any other library that support RabbitMQ 
 streams.
 
 **Important:**
 * Consuming from the stream can be achieved by passing parameters:
+  **_x-stream-offset = first_** - this will consume messages from the beginning
   ```python
+    # Example of how to consume messages from the stream with pika library
+    channel = connection.channel()
     channel.basic_qos(
         prefetch_count=10, 
     )
@@ -65,10 +66,8 @@ streams.
     )
   ```
 * If you consumed all the messages and no other messages are coming from weather stream, 
-reconnect to the stream and start consuming messages again.
-* Each message got random timestamp and event_id, so you can't just send the same message to the alerts API. No
-need to store messages somewhere else, purpose of this task is to show that you can build pipelines and react messages
-with code
+reconnect to the stream or check whether you set **x-stream-offset** and start consuming messages again.
+
 * If you are not sure about something, feel free to ask questions
 
 **Just to make sure that you are on the right track, here are some HINTS:**

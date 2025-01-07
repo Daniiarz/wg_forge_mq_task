@@ -35,10 +35,12 @@ Example of the message that you will receive from a response:
 }
 ```
 
-**Task:**
+### Task:
+
 * Create a consumer that will listen to the weather data stream and monitor the temperature in Vilnius. All the weather
 data is written to the **_weather_stream_**.
-* Call api and send alert messages to the **/weather-alerts** API, **If the temperature in Vilnius goes above 31 degrees**
+* Call api and send alert messages to the **/weather-alerts** API on the same host on port 5000,
+**If the temperature in Vilnius goes above 31 degrees**
 * Overall architecture should look like this:
     ```
     weather_stream -> consumer(this part is on you, produce messages that meet criteria) -> call api /weather-alerts API
@@ -49,7 +51,16 @@ data is written to the **_weather_stream_**.
 * We recommend using the official RabbitMQ client for Python (pika, aio_pika), but you can use any other library that support RabbitMQ 
 streams.
 
-**Important:**
+**Connection parameters:**
+* Vhost: **/**
+* Username: **forge_user**
+* Password: **{password_here}**
+* Host: **{host_here}**
+* Port: **5672**
+
+
+
+### Important
 * Consuming from the stream can be achieved by passing parameters:
   **_x-stream-offset = first_** - this will consume messages from the beginning
   ```python
@@ -70,7 +81,7 @@ reconnect to the stream or check whether you set **x-stream-offset** and start c
 
 * If you are not sure about something, feel free to ask questions
 
-**Just to make sure that you are on the right track, here are some HINTS:**
+**Just to make sure that you are on the right track:**
 * Key length is 46 characters, It should look something like this WG-FORGE-{other_part_of_the_key_just_for_example}
 * If you got all the 46 symbols correctly, but still its not working, try to order them by a timestamp is ascending order
 this way you will get the correct key

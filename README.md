@@ -58,6 +58,8 @@ streams.
 * Host: **{host_here}**
 * Port: **5672**
 
+***
+* Api docs can be found at http://{host_here}:5000/docs
 
 
 ### Important

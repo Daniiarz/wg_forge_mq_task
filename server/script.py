@@ -28,7 +28,7 @@ class NotificationResponse(BaseModel):
 
 async def producer():
     r_conn = redis.Redis.from_pool(redis_pool)
-    time.sleep(random.randint(0, 10))
+    time.sleep(random.randint(0, 5))
     a = await r_conn.get('key_set')
     if a:
         print("Already generated")

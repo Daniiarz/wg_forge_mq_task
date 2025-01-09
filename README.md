@@ -74,7 +74,6 @@ streams.
     channel.basic_consume(
         queue='weather_stream',
         on_message_callback=callback,
-        auto_ack=True,
         arguments={'x-stream-offset': 'first'} # this will consume messages from the beginning
     )
   ```

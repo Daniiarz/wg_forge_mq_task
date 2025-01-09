@@ -100,7 +100,7 @@ async def producer():
     async with connection:
         channel = await connection.channel()
         await channel.declare_queue(
-            'weather_queue',
+            'weather_stream',
             durable=True,
             arguments={"x-queue-type": "stream"},
         )
